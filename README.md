@@ -6,8 +6,11 @@ This repository contains the assignment work for the **Research Track I** course
 ## Table of Contents
 - [Introduction](#introduction)
 - [Node Details](#node-details)
+    - [Robot Controller Node](#robot-controller-node-robot_controller)
 - [Repository Structure](#repository-structure)
 - [Getting Started (Read Before Action)](#getting-started-read-before-action)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
 - [Launching Nodes](#launching-nodes)
 - [Implementation Details](#implementation-details)
 - [Summary](#summary)
@@ -36,7 +39,7 @@ The **Robot Controller Node** is responsible for controlling the robot's movemen
 
 ## Repository Structure
 
-The root of this repository is the package folder, which contains all necessary files and scripts for running the assignment nodes. When cloning the repository for the first time, place it directly in the `src` folder of your **ROS2** workspace.
+The root of this repository is the package folder, which contains all necessary files and scripts for running the assignment nodes. When cloning the repository for the first time, place it directly in the `src` folder of your ROS2 workspace.
 
 ### Folder and File Overview
 - **`/assignment2_rt_part2`**: Contains the main package for controlling the robot in the simulation.
@@ -53,11 +56,30 @@ The root of this repository is the package folder, which contains all necessary 
 
 - **`/setup.py`**: The script to build and install the package.
 
+- **`/setup.cfg`**: Configuration file for packaging and distributing the package.
+
 - **`/package.xml`**: Lists dependencies and package metadata.
 
 - **`/README.md`**: This file (Documentation).
 
 ## Getting Started (Read Before Action)
+
+### Prerequisites
+Before proceeding, ensure that **`ROS2`** is installed on your system.
+This package has been developed with **ROS2 Foxy**, but it should work with other ROS2 versions as well. 
+
+If you haven’t set up ROS2 yet, you can follow the official guide to install it:
+[ROS2 Installation Guide][https://docs.ros.org/]
+
+Additionally, you’ll need **`Python 3`** package to run this project. Ensure it is installed on your system. If not, you can install it by running:
+```bash
+sudo apt-get update
+sudo apt-get install python3
+```
+After installation, you can proceed to settting up the workspace.
+
+### Setup
+
 ## Launching Nodes
 ## Implementation Details
 ## Summary
