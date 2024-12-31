@@ -12,7 +12,10 @@ This repository contains the assignment work for the **Research Track I** course
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
 - [Launching Nodes](#launching-nodes)
+    - [Launch and spawn robot](#1-run-the-robot_urdf-package)
+    - [Launch robot controller node](#2-run-the-robot-controller-node)
 - [Implementation Details](#implementation-details)
+    - [Robot Controller Node](#robot-controller-node)
 - [Summary](#summary)
 
 ## Introduction
@@ -137,7 +140,114 @@ After building and sourcing, you need to source the workspace manually for the f
 source ~/ros2_ws/install/setup.bash
 ```
 
-
 ## Launching Nodes
+
+#### 1. Run the `robot_urdf` Package
+
+Before launching your node, ensure the simulation environment is running. Start the `robot_urdf` package to load the simulation and spawn the robot at position `(2, 2)` in Gazebo:
+```bash
+ros2 launch robot_urdf gazebo.launch.py
+```
+This will launch the simulation environment and spawn the robot in the Gazebo simulator. Please wait for everything to load properly before proceeding.
+
+#### 2. Run the Robot Controller Node
+
+At this point, you can proceed to run either the **C++** or **Python** version of the `robot_controller` node, depending on which implementation you want to use.
+
+1. **Running the C++ Version**
+
+To run the C++ node, simply execute the following command:
+```bash
+ros2 run assignment2_rt_part2 robot_controller
+```
+
+This will start the **C++ robot controller** node.
+
+2. **Running the Python Version**
+
+To run the Python node, execute the following command:
+
+```bash
+ros2 run assignment2_rt_part2 robot_controller
+```
+This will start the **python robot controller** node.
+
+#### 3. Stopping the nodes
+
+To stop the nodes, simply press `Ctrl+C` in the terminal where each node is running. This will terminate the nodes and stop the simulation.
+
 ## Implementation Details
+
+### Robot Controller Node
+The structure of the `robot_controller` node is similar in both **C++** and **Python**. The logic for handling user inputs, setting velocities, and publishing commands is nearly identical in both languages. Since the logic for both versions is fundamentally the same, I will explain the details using the **Python** version as an example.
+
+#### 1. Setting Velocities
+The `robot_controller` node prompts the user to input two key values for the robot's movement: the **linear velocity** and the **angular velocity**. These values control the robot’s forward/backward speed and its turning rate, respectively.
+
+To ensure that the robot handles the velocities properly, both velocities are constrained to be between `-5` and `5`. This ensures safe and reasonable movement for the robot in the simulation environment.
+
+- **Linear Velocity (x)**:<br> 
+The user is prompted to enter the linear velocity, which controls the robot's forward/backward speed. The input is validated to ensure that it is a floating-point number within the range of `-5` to `5`. If the input is invalid, the program asks the user to re-enter a valid value.
+```Python
+while True:
+try:
+    linear_x = float(input("Enter the linear velocity (between -5 and 5): "))
+    if -5 <= linear_x <= 5:
+        break
+    else:
+        print("Invalid input. Linear velocity must be between -5 and 5.")
+except ValueError:
+    print("Invalid input. Linear velocity must be a number.")
+```
+
+- **Angular Velocity (z)**:<br>
+The same process is repeated for the angular velocity input, which controls the robot’s turning speed. It is also validated to ensure it is within the valid range.
+```Python
+while True:
+    try:
+        angular_z = float(input("Enter the angular velocity (between -5 and 5): "))
+        if -5 <= angular_z <= 5:
+            break
+        else:
+            print("Invalid input. Angular velocity must be between -5 and 5.")
+    except ValueError:
+        print("Invalid input. Angular velocity must be a number.")
+```
+
+#### 2. Publishing User Input
+Once the velocities are set, the next step is to publish the values to the `/cmd_vel` topic. This is the primary topic through which velocity commands are sent to the robot in ROS2. The node creates a `Twist` message, which is the standard ROS message used for sending velocity commands. The `linear` and `angular` components of the `Twist` message are populated with the values provided by the user.
+
+To achieve this, a publisher is created that will send the velocity data to the `/cmd_vel` topic. This is done using the `create_publisher` method, which initializes the publisher with the message type `Twist` and the topic name `/cmd_vel`.
+
+Here's how the publisher is set up:
+```Python
+# Publisher for controlling the robot
+self.pub_cmd_vel = self.create_publisher(Twist, '/cmd_vel', 10)
+```
+Next, the Twist message is constructed and populated with the linear and angular velocities entered by the user. The linear velocity is assigned to the `linear.x` field, and the angular velocity is assigned to the `angular.z` field of the `Twist` message.
+
+Here’s how the message is constructed and published:
+```Python
+# Create a Twist message and populate with user input
+robot_vel = Twist() 
+robot_vel.linear.x = linear_x
+robot_vel.angular.z = angular_z
+# Publish to the cmd_vel topic to move the robot
+self.pub_cmd_vel.publish(robot_vel)
+self.get_logger().info("Moving robot ...")
+```
+This sends the velocity commands to the robot, allowing it to move according to the user’s input.
+
+#### 3. Stopping the Turtle
+After the robot has been commanded to move, we stop it after 1 second by setting both the linear and angular velocities to zero. This halts the robot's movement. To ensure that the robot stops, a stop command is published to the `/cmd_vel` topic.
+
+The following code snippet shows how the robot is stopped:
+```Python
+time.sleep(1) # Sleep for 1 second
+robot_vel.linear.x = 0.0
+robot_vel.angular.z = 0.0
+self.pub_cmd_vel.publish(robot_vel)
+self.get_logger().info("Robot stopped.")
+```
+
 ## Summary

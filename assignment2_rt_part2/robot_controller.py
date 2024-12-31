@@ -41,9 +41,8 @@ class RobotController(Node):
 
         # Publish to the cmd_vel topic to move the robot
         self.pub_cmd_vel.publish(robot_vel)
+        self.get_logger().info("Moving robot ...")
 
-        # Stop the robot after 1 second
-        self.get_logger().info("Moving robot... (stopping after 1 second)")
         time.sleep(1) # Sleep for 1 second
         robot_vel.linear.x = 0.0
         robot_vel.angular.z = 0.0
