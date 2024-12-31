@@ -21,7 +21,7 @@ The robot is pre-spawned at position `(2, 2)` by another package. The goal of th
 
 This package demonstrates the use of ROS2 to enable basic robot motion control and interaction with the simulation environment.
 
-**Note:**:
+**Note**:
 - This assignment is completed using both **Python** and **C++**. 
 
 ## Node Details
@@ -30,9 +30,9 @@ This package demonstrates the use of ROS2 to enable basic robot motion control a
 The **Robot Controller Node** is responsible for controlling the robot's movements in the simulation based on user input. It handles both linear and angular velocity commands and interacts with the robot via the `/cmd_vel` topic.
 
 **Key Functions**:
-    -   **User Input Handling**: The node prompts the user to input values for the robot's linear and angular velocities.
-    -   **Movement Execution**: After the velocities are set, the node sends the corresponding movement commands to the robot, causing it to move for one second.
-    -   **Stop and Reset**: After one second of movement, the robot stops, and the interface is reset, allowing the user to input new movement commands.
+ - **User Input Handling**: The node prompts the user to input values for the robot's linear and angular velocities.
+ - **Movement Execution**: After the velocities are set, the node sends the corresponding movement commands to the robot, causing it to move for one second.
+ - **Stop and Reset**: After one second of movement, the robot stops, and the interface is reset, allowing the user to input new movement commands.
 
 ## Repository Structure
 
