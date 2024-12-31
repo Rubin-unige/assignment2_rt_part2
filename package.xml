@@ -3,16 +3,22 @@
 <package format="3">
   <name>assignment2_rt_part2</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>A multi-language package with Python and C++ support</description>
   <maintainer email="S6558048@studenti.unige.it">rubin</maintainer>
   <license>TODO: License declaration</license>
 
-  <test_depend>ament_copyright</test_depend>
-  <test_depend>ament_flake8</test_depend>
-  <test_depend>ament_pep257</test_depend>
-  <test_depend>python3-pytest</test_depend>
+  <!-- Python dependencies -->
+  <exec_depend>ament_copyright</exec_depend>
+  <exec_depend>ament_flake8</exec_depend>
+  <exec_depend>ament_pep257</exec_depend>
+  <exec_depend>python3-pytest</exec_depend>
+
+  <!-- C++ dependencies -->
+  <depend>rclcpp</depend>
+  <depend>geometry_msgs</depend>
 
   <export>
+    <build_type>ament_cmake</build_type>
     <build_type>ament_python</build_type>
   </export>
 </package>
