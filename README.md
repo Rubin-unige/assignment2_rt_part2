@@ -69,7 +69,7 @@ Before proceeding, ensure that **`ROS2`** is installed on your system.
 This package has been developed with **ROS2 Foxy**, but it should work with other ROS2 versions as well. 
 
 If you haven’t set up ROS2 yet, you can follow the official guide to install it:
-[ROS2 Installation Guide][https://docs.ros.org/]
+([ROS2 Installation Guide](https://docs.ros.org/))
 
 Additionally, you’ll need **`Python 3`** package to run this project. Ensure it is installed on your system. If not, you can install it by running:
 ```bash
