@@ -251,3 +251,6 @@ self.get_logger().info("Robot stopped.")
 ```
 
 ## Summary
+The `robot_controller` node is a simple ROS2 program that allows users to control a robot's movement by setting linear and angular velocities. The node prompts the user for input, validates the values, and publishes them to the `/cmd_vel` topic, enabling the robot to move. After 1 second, the robot is stopped by setting both velocities to zero.
+
+This program serves as a foundational example of working with ROS2 and can be expanded for more complex projects in the future. By learning how to handle user input, publish messages, and control robot movement, this node provides a solid starting point for developing more advanced ROS2 applications.
