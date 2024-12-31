@@ -1,6 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
+import time
 
 class RobotController(Node):
     def __init__(self):
@@ -43,7 +44,7 @@ class RobotController(Node):
 
         # Stop the robot after 1 second
         self.get_logger().info("Moving robot... (stopping after 1 second)")
-        rclpy.sleep(1)  # Sleep for 1 second
+        time.sleep(1) # Sleep for 1 second
         robot_vel.linear.x = 0.0
         robot_vel.angular.z = 0.0
         self.pub_cmd_vel.publish(robot_vel)
@@ -57,14 +58,13 @@ def main(args=None):
     # Main loop to control the robot
     try:
         while rclpy.ok():
-            robot_controller.control_robot()  # Ask user for input and move robot
+            robot_controller.control_robot()
     except KeyboardInterrupt:
         pass  
 
     # Clean up after node shutdown
     robot_controller.destroy_node()
     rclpy.shutdown()
-
 
 if __name__ == '__main__':
     main()
