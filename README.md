@@ -65,20 +65,78 @@ The root of this repository is the package folder, which contains all necessary 
 ## Getting Started (Read Before Action)
 
 ### Prerequisites
-Before proceeding, ensure that **`ROS2`** is installed on your system.
-This package has been developed with **ROS2 Foxy**, but it should work with other ROS2 versions as well. 
+Before proceeding, ensure that **`ROS2`** is installed on your system.<br>
+This package has been developed with `ROS2 Foxy`, but it should work with other ROS2 versions as well. 
 
-If you haven’t set up ROS2 yet, you can follow the official guide to install it:
-([ROS2 Installation Guide](https://docs.ros.org/))
+If you haven’t set up ROS2 yet, you can follow the official guide to install it:<br>
+[ROS2 Installation Guide](https://docs.ros.org/)
 
-Additionally, you’ll need **`Python 3`** package to run this project. Ensure it is installed on your system. If not, you can install it by running:
+Additionally, you’ll need `Python 3` package to run this project. Ensure it is installed on your system. If not, you can install it by running:
 ```bash
 sudo apt-get update
 sudo apt-get install python3
 ```
-After installation, you can proceed to settting up the workspace.
+Next, install the required ROS2 packages. These packages are necessary for the robot simulation and its control:
+```bash
+sudo apt-get install ros-<your-distro>-xacro ros-<your-distro>-joint-state-publisher ros-<your-distro>-gazebo*
+```
+Replace `<your-distro>` with your ROS2 distribution, for example, `foxy`, `humble`, or `galactic`.
+
+Once **ROS2**, **Python 3**, and the necessary ROS2 packages are installed, you can proceed to set up the workspace.
 
 ### Setup
+#### 1. Set up your ROS2 workspace
+
+Create a new workspace (or use an existing one) and navigate to its `src` directory:
+```bash
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/src
+```
+
+#### 2. Install the `robot_urdf` package
+Before cloning this repository, you need to get the `robot_urdf` package, which handles starting the simulation and spawning the robot at position `(2, 2)` in the environment. Clone the `robot_urdf` repository into your workspace’s `src` folder:
+```bash
+git clone https://github.com/CarmineD8/robot_urdf.git
+```
+
+#### 3. Switch to the `ros2` branch
+Once the `robot_urdf` package is cloned, navigate to its directory:
+```bash
+cd robot_urdf
+```
+Change the Git branch from `main` to the `ros2` branch:
+```bash
+git checkout ros2
+```
+
+#### 4. Clone this repository
+Now that the `robot_urdf` package is set up, return to the `src` folder and clone this repository into your workspace’s `src` folder:
+```bash
+cd ~/ros2_ws/src
+git clone https://github.com/Rubin-unige/assignment2_rt_part2.git
+```
+
+#### 5. Build the workspace
+Once both repositories are cloned, navigate back to the root of your workspace and build the packages using the following command:
+```bash
+cd ~/ros2_ws
+colcon build
+```
+
+#### 6. Add the Workspace to Your ROS Environment
+
+To ensure that your workspace is sourced automatically every time you start a new terminal session, add it to your `.bashrc` file:
+```bash
+echo "source ~/ros2_ws/install/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+
+#### 7. Source the workspace
+After building and sourcing, you need to source the workspace manually for the first time in the current terminal session:
+```bash
+source ~/ros2_ws/install/setup.bash
+```
+
 
 ## Launching Nodes
 ## Implementation Details
