@@ -28,7 +28,7 @@ The robot is pre-spawned at position `(2, 2)` by another package. The goal of th
 This package demonstrates the use of ROS2 to enable basic robot motion control and interaction with the simulation environment.
 
 **Note**:
-- This assignment is completed using both **Python** and **C++**. 
+- This assignment is completed using both **Python**. 
 
 ## Node Details
 
@@ -152,21 +152,7 @@ This will launch the simulation environment and spawn the robot in the Gazebo si
 
 #### 2. Run the Robot Controller Node
 
-At this point, you can proceed to run either the **C++** or **Python** version of the `robot_controller` node, depending on which implementation you want to use.
-
-1. **Running the C++ Version**
-
-To run the C++ node, simply execute the following command:
-```bash
-ros2 run assignment2_rt_part2 robot_controller
-```
-
-This will start the **C++ robot controller** node.
-
-2. **Running the Python Version**
-
-To run the Python node, execute the following command:
-
+At this point, you can proceed to run the **Python** version of the `robot_controller` node using following command:
 ```bash
 ros2 run assignment2_rt_part2 robot_controller
 ```
@@ -179,8 +165,7 @@ To stop the nodes, simply press `Ctrl+C` in the terminal where each node is runn
 ## Implementation Details
 
 ### Robot Controller Node
-The structure of the `robot_controller` node is similar in both **C++** and **Python**. The logic for handling user inputs, setting velocities, and publishing commands is nearly identical in both languages. Since the logic for both versions is fundamentally the same, I will explain the details using the **Python** version as an example.
-
+The **Robot Controller Node** is responsible for controlling the robot's movements in the simulation based on user input. It has following key features:
 #### 1. Setting Velocities
 The `robot_controller` node prompts the user to input two key values for the robot's movement: the **linear velocity** and the **angular velocity**. These values control the robot’s forward/backward speed and its turning rate, respectively.
 
