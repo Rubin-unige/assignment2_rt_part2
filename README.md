@@ -28,7 +28,8 @@ The robot is pre-spawned at position `(2, 2)` by another package. The goal of th
 This package demonstrates the use of ROS2 to enable basic robot motion control and interaction with the simulation environment.
 
 **Note**:
-- This assignment is completed using both **Python**. 
+- This assignment is completed using **Python**. 
+- I removed the c++ part of this assignment as I was not able to run both c++ and python in same package.
 
 ## Node Details
 
